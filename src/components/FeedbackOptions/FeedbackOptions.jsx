@@ -1,13 +1,23 @@
-import { CommentOption } from './FeedbackOptions.styled';
+import PropTypes from 'prop-types';
+import {
+  CommentOption,
+  OptionList,
+  OptionButton,
+} from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => (
-  <ul>
+  <OptionList>
     {options.map(option => (
       <CommentOption key={option}>
-        <button type="button" onClick={() => onLeaveFeedback(option)}>
+        <OptionButton type="button" onClick={() => onLeaveFeedback(option)}>
           {option}
-        </button>
+        </OptionButton>
       </CommentOption>
     ))}
-  </ul>
+  </OptionList>
 );
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
