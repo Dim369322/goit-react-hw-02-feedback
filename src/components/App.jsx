@@ -25,8 +25,10 @@ class App extends Component {
     return total;
   };
 
-  countPositiveFeedbackPercentage = (totalFeedback, goodFeedback) => {
-    const positiveFeedback = (goodFeedback / totalFeedback) * 100;
+  countPositiveFeedbackPercentage = () => {
+    const { good, neutral, bad } = this.state;
+    const totalFeedback = good + neutral + bad;
+    const positiveFeedback = (this.state.good / totalFeedback) * 100;
 
     return isNaN(positiveFeedback) ? 0 : Math.round(positiveFeedback);
   };
@@ -34,10 +36,7 @@ class App extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     const totalFeedbacks = this.countTotalFeedback();
-    const positivePercentage = this.countPositiveFeedbackPercentage(
-      totalFeedbacks,
-      good
-    );
+    const positivePercentage = this.countPositiveFeedbackPercentage();
 
     return (
       <Feedback>
